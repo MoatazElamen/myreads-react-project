@@ -9,12 +9,15 @@ export default class App extends Component {
         books:[],
         isLoading:true
     }
-    updateUI= async ()=>{
+    updateUI = async ()=>{
         BooksAPI.getAll()
         .then(data=>{
             this.setState(()=>({
                 books:data
             }))
+        })
+        .then(()=>{
+            this.setState({isLoading:false})
         })
     }
 
@@ -26,21 +29,14 @@ export default class App extends Component {
     }
     componentDidMount(){
         this.updateUI()
-        .then(()=>{
-            this.setState({isLoading:false})
-        })
     }
 
     render() {
-
-        if(this.state.isLoading){
-            return <div className="loading-component"><img src={Heart} alt="loading"/></div>
-        }
         return (
         <div>
             <Switch>
                 <Route exact path="/">
-                    <Main books={this.state.books} handleUpdate={this.handleUpdate}/>
+                    <Main books={this.state.books} isLoading={this.state.isLoading} handleUpdate={this.handleUpdate}/>
                 </Route>
                 <Route exact path="/search">
                     <SearchPage  loadTrigger={this.loadTrigger} handleUpdate={this.handleUpdate}/>
