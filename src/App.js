@@ -39,7 +39,7 @@ export default class App extends Component {
                     <Main books={this.state.books} isLoading={this.state.isLoading} handleUpdate={this.handleUpdate}/>
                 </Route>
                 <Route exact path="/search">
-                    <SearchPage  loadTrigger={this.loadTrigger} handleUpdate={this.handleUpdate}/>
+                    <SearchPage  books={this.state.books} handleUpdate={this.handleUpdate}/>
                 </Route>
             </Switch>
             </div>

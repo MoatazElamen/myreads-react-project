@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
 html, body, .root {
   height: 100%;
 }
@@ -119,7 +120,12 @@ a:hover{
   border: none;
   outline: none;
 }
-
+.error{
+  font-weight: bold;
+  font-family: 'Chango', cursive;
+  font-size:50pt;
+  text-align: center;
+}
 button:active {
   border: red;
   outline: none;

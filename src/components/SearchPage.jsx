@@ -7,19 +7,25 @@ export default class SearchPage extends Component {
     state = {
      query:"",
      books:[],
-     fetcing:false
+     fetcing:false,
+     error:""
      
     }
     handleSearch= async(query)=>{
         if(query !== ""){
             this.setState({fetcing:true})
             BooksAPI.search(query).then((data)=>{
-                if(data){
-                    this.setState({books:[]})
+                if(data && !data.hasOwnProperty('error')){
+                    this.setState({books:[],error:null})
                     this.setState({books:data})
-                    console.log(data)
+                }
+                else if(this.state.query === ""){
+                    this.setState({books:[],error:null})
+                
                 }else{
-                    this.setState({error:"Books not found"})
+                    
+                    this.setState({error:"Invalid Query !",
+                                   books:[]})
                 }
 
             })
@@ -76,11 +82,13 @@ export default class SearchPage extends Component {
                             <div className="search-books-results">
                                 <ol className="books-grid">
                                 {this.state.query !== '' && this.state.books.map((book)=>(
-                                    <Book key={book.id} handleUpdate={this.props.handleUpdate} data={book} />
+                                    <Book key={book.id} 
+                                        ownedbook={this.props.books.filter(owned=>owned.id===book.id)[0]}
+                                        handleUpdate={this.props.handleUpdate} data={book} />
                                 ))}
                             </ol>
                             </div>
-
+                            {this.state.error && <div className="error">{this.state.error} </div>}
                         </div>
                     )
                 }

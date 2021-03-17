@@ -4,6 +4,7 @@ export default class Book extends Component {
     static getDerivedStateFromError(error) {
         // Update state so the next render will show the fallback UI.
         console.log(error)
+        
       }
     componentDidMount(){
         
@@ -22,7 +23,7 @@ export default class Book extends Component {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${thumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                        <select defaultValue="move" onChange={(e)=>{
+                        <select defaultValue={this.props.ownedbook?this.props.ownedbook.shelf:this.props.data.shelf} onChange={(e)=>{
                             this.handleSelection(e.target.value)
                         }}>
                             
