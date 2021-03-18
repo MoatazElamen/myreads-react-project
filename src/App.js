@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Main from './Main';
 import {Route,Switch} from 'react-router-dom';
-import SearchPage from './components/SearchPage'
-import * as BooksAPI from './BooksAPI'
-import Heart from './Heart-beat.gif'
+import SearchPage from './components/SearchPage';
+import * as BooksAPI from './BooksAPI';
+
 export default class App extends Component {
     state = {
         books:[],
         isLoading:true
     }
     updateUI = async ()=>{
-        BooksAPI.getAll()
+        await BooksAPI.getAll()
         .then(data=>{
             this.setState(()=>({
                 books:data
@@ -23,7 +23,7 @@ export default class App extends Component {
 
     handleUpdate = async(book,shelf)=>{
         BooksAPI.update(book,shelf).then((data)=>{
-            console.log(data)
+            
             this.updateUI()
         })
     }

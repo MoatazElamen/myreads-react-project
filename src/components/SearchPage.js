@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import Heart from '../Heart-beat.gif'
 import Book from './Book'
-export default class SearchPage extends Component {
+import propTypes from 'prop-types'
+class SearchPage extends Component {
     state = {
      query:"",
      books:[],
@@ -102,3 +103,8 @@ export default class SearchPage extends Component {
         
     }
 }
+SearchPage.propTypes = {
+    books:propTypes.array.isRequired,
+    handleUpdate:propTypes.func.isRequired
+}
+export default SearchPage
